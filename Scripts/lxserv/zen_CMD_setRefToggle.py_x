@@ -1,0 +1,69 @@
+#!/usr/bin/env python
+
+import lx
+import lxifc
+import lxu
+import lxu.command
+import traceback
+            
+class cj_setRef(lxu.command.BasicCommand):
+    
+    def __init__(self):
+        lxu.command.BasicCommand.__init__(self)
+        # Add a string attribute. Note: this could also be an integer if the list
+        # is static rather than dynamic and ''TextValueHints'' are used. Currently
+        # ''TextValueHints'' aren't implemented in the python API so it's
+        # adviseable to use a string attribute.
+        self.dyna_Add('cj_setRef', lx.symbol.sTYPE_BOOLEAN)
+        # Set the attribute's queriable flag
+        self.basic_SetFlags(0, lx.symbol.fCMDARG_QUERY)
+        # See if the user value exists
+        if lx.eval("query scriptsysservice userValue.isDefined ? cj_setRef_val")==0:
+            # Value doesn't exist; create it with calls to user.defNew
+            #  and user.def, and give it an initial value with
+            #  user.value
+            lx.eval( 'user.defNew cj_setRef_val boolean' );
+                 
+    #def cmd_Execute(self,flags):
+        # in the execute method we're going to store the current value of our
+        # attribute so that it can be retrieved by the query method later. There's
+        # no way to permanently store this information inside the command class
+        # itself as the command is created & destroyed between each use. Normally
+        # we'd want to be using persistent storage but for simplicity in this
+        # example we'll use a UserValue.
+        #if self.dyna_IsSet(0):
+            #lx.eval('user.value {cj_setRef_val} {%s}' % self.dyna_String(0))
+
+    def basic_Execute(self, msg, flags):
+        try:
+            self.CMD_EXE()
+            if self.dyna_IsSet(0):
+                lx.eval('user.value {cj_setRef_val} {%s}' % self.dyna_String(0))
+        except Exception:
+            lx.out(traceback.format_exc())
+            lx.eval('layout.createOrClose EventLog "Event Log_layout" title:@macros.layouts@EventLog@ width:600 height:600 persistent:true open:true')
+            
+    def CMD_EXE(self):
+        active = lx.eval('user.value {cj_setRef_val} ?')
+        if active==1:
+            lx.eval('item.refSystem')
+        else:
+            lx.eval('item.refSystem {}')
+                
+    def cmd_Query(self,index,vaQuery):
+        # In the query method we need to retrieve the value we stored in the execute
+        # method and add it to a ValueArray object to be returned by the query.
+        va = lx.object.ValueArray()
+        # Initialise the ValueArray
+        va.set(vaQuery)
+        
+        if index == 0:
+            # retrieve the value we stored earlier and add it to the ValueArray
+            va.AddString(lx.eval('user.value {cj_setRef_val} ?'))
+            
+        self.CMD_EXE()
+        
+        return lx.result.OK
+        
+lx.bless(cj_setRefToggle, "cj.setRefToggle")
+    
