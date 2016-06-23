@@ -1,7 +1,5 @@
 #python
 
-
-
 import modo, lx, lxu, symbols
 
 MASK_GROUPS = [
