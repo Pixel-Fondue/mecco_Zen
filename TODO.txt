@@ -15,7 +15,6 @@ faster render presets
 item list docked on left, shader tree docked on right (hide/show)
 pause render by default
 render window as popup palette
-F9 render in toolbar
 preset browser icons
 items list icon
 shader tree icon
