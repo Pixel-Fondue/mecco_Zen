@@ -13,7 +13,6 @@ more default scenes
 add material default scene
 faster render presets
 item list docked on left, shader tree docked on right (hide/show)
-v key toolbox in toolbar
 pause render by default
 render window as popup palette
 F9 render in toolbar
