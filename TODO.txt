@@ -2,20 +2,26 @@ TODO:
 
 FIX (scaling on drop) primitives in Mesh presets
 
-Assign random materials by poly island
-
-select polys by Part
-remove parts
-
+Kelvin:
 fix broken material presets
 more environments
 more default scenes
 add material default scene
 faster render presets
-item list docked on left, shader tree docked on right (hide/show)
-pause render by default
-render window as popup palette
-preset browser icons
-items list icon
-shader tree icon
+icons
+
+Zen:
+icons
+
+Tagger:
+select connected by tag (part, material, set)**
+delete all part tags**
+random materials to each body**
+assign item masks to multiple**
+convert ptags to part tags or selection sets**
+icons
+
+Camera Lister:
+from Simon?
+
 other kit icons (modes bar)

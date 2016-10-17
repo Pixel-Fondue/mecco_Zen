@@ -11,11 +11,8 @@ class zen_SetWeight(lxu.command.BasicCommand):
 	def __init__(self):
 		lxu.command.BasicCommand.__init__(self)
 
-		self.dyna_Add('mode', lx.symbol.sTYPE_STRING)
-		self.basic_SetFlags(0, lx.symbol.fCMDARG_OPTIONAL)
-
 		self.dyna_Add('weight', lx.symbol.sTYPE_FLOAT)
-		self.basic_SetFlags(1, lx.symbol.fCMDARG_OPTIONAL)
+		self.basic_SetFlags(0, lx.symbol.fCMDARG_OPTIONAL)
 
 	def basic_Execute(self, msg, flags):
 		try:
