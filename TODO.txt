@@ -10,9 +10,6 @@ add material default scene
 faster render presets
 icons
 
-Zen:
-icons
-
 Tagger:
 select connected by tag (part, material, set)**
 delete all part tags**
