@@ -39,6 +39,9 @@ def selMode():
 class CMD_Zen_doubleClick(lxu.command.BasicCommand):
 
     def basic_Execute(self, msg, flags):
+        if not lx.eval('user.value mecco_zen.doubleClick ?'):
+            return lx.symbol.e_OK
+
         if selMode() == 'item':
             if selectedIsMesh():
                 lx.eval("select.typeFrom polygon;vertex;edge;item;pivot;center;ptag true")
