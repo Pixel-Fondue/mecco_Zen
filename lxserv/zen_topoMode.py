@@ -1,6 +1,6 @@
 # python
 
-import lx, modo, lxu.command, traceback, passify, lxifc
+import lx, modo, lxu.command, traceback, lxifc
 
 CMD_NAME = 'zen.topoMode'
 
