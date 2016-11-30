@@ -49,9 +49,12 @@ class myGreatCommand(lxu.command.BasicCommand):
         va = lx.object.ValueArray()
         va.set(vaQuery)
         if index == 1:
-            if lx.eval('view3d.topology ?'):
-                va.AddInt(1)
-            else:
+            try:
+                if lx.eval('view3d.topology ?'):
+                    va.AddInt(1)
+                else:
+                    va.AddInt(0)
+            except:
                 va.AddInt(0)
         return lx.result.OK
 
