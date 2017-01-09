@@ -152,7 +152,7 @@ class CommandClass(lxu.command.BasicCommand):
 
                 lx.eval('!cmds.mapKey {%s} {%s} {%s} {%s} {%s} {%s}' % (key, command, mapping, state, region, context))
 
-        modo.dialogs.alert("Mapped Default Hotkeys", "Mapped %s default hotkeys. See Zen documentation for details." % len(HOTKEYS))
+        modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Zen documentation for details." % len(HOTKEYS))
         lx.eval("OpenURL {kit_mecco_zen:Documentation/hotkeys.html}")
 
 lx.bless(CommandClass, "zen.mapDefaultHotkeys")
@@ -170,9 +170,8 @@ class RemoveCommandClass(lxu.command.BasicCommand):
                 region = context[2]
                 context = context[3]
 
-                lx.eval('!cmds.mapKey {%s} {} {%s} {%s} {%s} {%s}' % (key, mapping, state, region, context))
+                lx.eval('!cmds.clearKey {%s} {%s} {%s} {%s} {%s}' % (key, mapping, state, region, context))
 
-        modo.dialogs.alert("Mapped Default Hotkeys", "Mapped %s default hotkeys. See Zen documentation for details." % len(HOTKEYS))
-        lx.eval("OpenURL {kit_mecco_zen:Documentation/hotkeys.html}")
+        modo.dialogs.alert("Cleared Zen Hotkeys", "Cleared %s Zen hotkeys." % len(HOTKEYS))
 
 lx.bless(RemoveCommandClass, "zen.unmapDefaultHotkeys")
