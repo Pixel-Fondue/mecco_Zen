@@ -22,6 +22,7 @@ class CommandClass(lxu.command.BasicCommand):
         lx.eval('pref.value opengl.mouseRegionsSelect false')
 
         modo.dialogs.alert("Mapped Zen Double-Click", "Double-click in a 3D viewport\nis now mapped to 'zen.doubleClick', and\nPreferences > OpenGL > Selection > Mouse Regions Trigger Selection\nis now disabled.")
+        lx.eval("OpenURL {kit_mecco_zen:Documentation/doubleclick.html}")
 
 lx.bless(CommandClass, "zen.enableZenDoubleClick")
 
