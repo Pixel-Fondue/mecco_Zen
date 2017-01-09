@@ -13,6 +13,14 @@ HOTKEYS = [
 
     {
         "contexts":[
+            [".global", "(stateless)", ".anywhere", "(contextless)"]
+        ],
+        "key":"alt-backquote",
+        "command":"viewport.maximize"
+    },
+
+    {
+        "contexts":[
             [".global", "(stateless)", ".anywhere", "(contextless)"],
             [".global", "(stateless)", ".anywhere", ".itemMode"]
         ],
