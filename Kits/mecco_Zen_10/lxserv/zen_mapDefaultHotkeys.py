@@ -136,13 +136,15 @@ HOTKEYS = [
 
 ]
 
+
 class CommandClass(lxu.command.BasicCommand):
 
     def cmd_Execute(self,flags):
         for hotkey in HOTKEYS:
+            command = hotkey["command"]
+            key = hotkey["key"]
+
             for context in hotkey["contexts"]:
-                key = hotkey["key"]
-                command = hotkey["command"]
                 mapping = context[0]
                 state = context[1]
                 region = context[2]
@@ -154,3 +156,23 @@ class CommandClass(lxu.command.BasicCommand):
         lx.eval("OpenURL {kit_mecco_zen:Documentation/hotkeys.html}")
 
 lx.bless(CommandClass, "zen.mapDefaultHotkeys")
+
+
+class RemoveCommandClass(lxu.command.BasicCommand):
+
+    def cmd_Execute(self,flags):
+        for hotkey in HOTKEYS:
+            key = hotkey["key"]
+
+            for context in hotkey["contexts"]:
+                mapping = context[0]
+                state = context[1]
+                region = context[2]
+                context = context[3]
+
+                lx.eval('!cmds.mapKey {%s} {} {%s} {%s} {%s} {%s}' % (key, mapping, state, region, context))
+
+        modo.dialogs.alert("Mapped Default Hotkeys", "Mapped %s default hotkeys. See Zen documentation for details." % len(HOTKEYS))
+        lx.eval("OpenURL {kit_mecco_zen:Documentation/hotkeys.html}")
+
+lx.bless(RemoveCommandClass, "zen.unmapDefaultHotkeys")
