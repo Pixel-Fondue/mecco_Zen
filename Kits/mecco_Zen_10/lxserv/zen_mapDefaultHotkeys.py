@@ -13,7 +13,7 @@ HOTKEYS = [
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "layout_zen6_layout"]
         ],
         "key":"ctrl-shift-space",
         "command":"attr.formPopover {ZenPie_Frames:sheet}"
