@@ -15,6 +15,14 @@ HOTKEYS = [
         "contexts":[
             [".global", "(stateless)", ".anywhere", "(contextless)"]
         ],
+        "key":"ctrl-shift-space",
+        "command":"attr.formPopover {ZenPie_Frames:sheet}"
+    },
+
+    {
+        "contexts":[
+            [".global", "(stateless)", ".anywhere", "(contextless)"]
+        ],
         "key":"alt-backquote",
         "command":"viewport.maximize"
     },

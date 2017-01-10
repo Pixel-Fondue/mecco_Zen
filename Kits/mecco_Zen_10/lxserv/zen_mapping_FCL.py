@@ -24,6 +24,9 @@ FORMS = [
     }, {
         "label":"ActionCtr Pie",
         "hash":"ZenPie_ActionCtr:sheet"
+    }, {
+        "label":"Layout Frames Pie",
+        "hash":"ZenPie_Frames:sheet"
     }
 ]
 
