@@ -2,7 +2,8 @@ body {
   font-family:sans-serif;
   width:720px;
   margin:2em auto;
-  color:#333;
+  color:#666;
+  line-height: 1.5em;
 }
 
 h1, h2, h3, h4 {
@@ -21,9 +22,15 @@ hr {
   margin: 4em 0;
 }
 
+strong {
+  color:#333;
+}
+
 a {
-  text-decoration: none;
-  color:inherit;
+  padding: .1em .3em 0;
+  background-color: rgb(241, 230, 255);
+  color: rgb(92, 16, 233);
+  display: inline-block;
 }
 
 ul#commandsList {
@@ -85,4 +92,18 @@ ul.arguments li {
 
 ul.arguments li li {
   margin-bottom:inherit;
+}
+
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 25px;
+	height: 0;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }

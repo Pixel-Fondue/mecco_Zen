@@ -13,6 +13,14 @@ HOTKEYS = [
 
     {
         "contexts":[
+            [".global", "(stateless)", ".anywhere", "(contextless)"]
+        ],
+        "key":"n",
+        "command":"layout.window ItemListAddPBViewPopover"
+    },
+
+    {
+        "contexts":[
             [".global", "(stateless)", ".anywhere", "layout_zen6_layout"]
         ],
         "key":"ctrl-shift-space",
