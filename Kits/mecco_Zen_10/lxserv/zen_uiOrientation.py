@@ -47,7 +47,8 @@ class CommandClass(CommanderClass):
   #      else:
   #          lx.eval("viewport.hide False tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore zen6_toolboxes_mini_tag")
             
-        lx.eval("user.value right_handed %s" %str(newVal))
+        lx.out("cmd = ", "user.value right_handed %s" % int(newVal))
+        lx.eval("user.value right_handed %s" % int(newVal))
         
         notifier = Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
@@ -66,7 +67,6 @@ class CommandClass(CommanderClass):
 
         action = self.commander_arg_value(0)
 
-        lx.out("action = ", action)        
         if action == "right":
             va.AddInt(lx.eval("user.value right_handed ?"))
         elif action == "left":
@@ -77,8 +77,11 @@ class CommandClass(CommanderClass):
     def arg_UIValueHints(self, index):
         return cmd_Notifiers()
         
+    def commander_notifiers(self):
+        return [("zen.notifier", "")]
+        
     def cmd_Flags (self):
-        return lx.symbol.fCMD_UI | lx.symbol.fCMD_MODEL | lx.symbol.fCMD_UNDO
+        return lx.symbol.fCMD_UI | lx.symbol.fCMD_UNDO
         
 class cmd_Notifiers(lxu.command.BasicHints):
 
