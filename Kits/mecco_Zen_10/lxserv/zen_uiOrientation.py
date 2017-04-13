@@ -6,7 +6,6 @@ from zen import CommanderClass
 CMD_NAME = 'zen.uiOrientation'
 
 class CommandClass(CommanderClass):
-
     def commander_arguments(self):
         return [
                 {
@@ -26,19 +25,19 @@ class CommandClass(CommanderClass):
         right_handed = self.commander_arg_value(0)
 
         lx.eval("user.value right_handed %s" % int(right_handed))
-        
+
         tools = ["full_tag", "mini_tag", "miniFusion_tag", "miniPaint_tag", "miniSculpt_tag"]
-        
+
         if right_handed:
             if lx.eval("viewport.hide ? tag zen6_presetBrowser_vpgrp_tag left zen6_upper_left_vptab_restore zen6_left_itemsTab_vpTag"):
                 lx.eval("viewport.hide hide tag zen6_presetBrowser_vpgrp_tag left zen6_upper_left_vptab_restore zen6_left_itemsTab_vpTag")
-                
+
             currentTool = None
-            
+
             for tool in tools:
                 if lx.eval("viewport.hide ? tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s" % tool):
                     currentTool = tool
-                    
+
             if not lx.eval("viewport.hide ? tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s"% currentTool):
                 lx.eval("viewport.hide true tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s"% currentTool)
                 
@@ -46,14 +45,13 @@ class CommandClass(CommanderClass):
         else:
             if lx.eval("viewport.hide ? tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag"):
                 lx.eval("viewport.hide hide tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag")
-                
+
             currentTool = None
-            
+
             for tool in tools:
                 if lx.eval("viewport.hide ? tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s" % tool):
                     currentTool = tool
                     
-            lx.out("kuku ", currentTool)
             if not lx.eval("viewport.hide ? tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s"% currentTool):
                 lx.eval("viewport.hide true tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s"% currentTool)
                 

@@ -1,12 +1,13 @@
 # python
 
 import lx, modo, lxu.command, traceback, os, re
+from zen import CommanderClass
 
 CMD_NAME = 'zen.startup'
 
-class myGreatCommand(lxu.command.BasicCommand):
+class myGreatCommand(CommanderClass):
 
-    def CMD_EXE(self, msg, flags):
+    def commander_execute(self, msg, flags):
         zen_version_from_config = lx.eval("user.value zen_version ?")
 
         kit_folder = lx.eval("query platformservice alias ? {kit_mecco_zen:}")
@@ -39,11 +40,5 @@ class myGreatCommand(lxu.command.BasicCommand):
                 )
 
         lx.eval("user.value zen_version %s" % zen_version_installed)
-
-    def basic_Execute(self, msg, flags):
-        try:
-            self.CMD_EXE(msg, flags)
-        except Exception:
-            lx.out(traceback.format_exc())
 
 lx.bless(myGreatCommand, CMD_NAME)

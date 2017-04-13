@@ -1,7 +1,8 @@
 # python
 
-__version__ = "0.3.1"
+__version__ = "0.38"
 __author__ = "Adam"
 
 from Commander import *
 from MeshEditor import *
+from Var import *

@@ -1,6 +1,7 @@
 # python
 
 import lx, lxu, modo
+from zen import CommanderClass
 
 HOTKEYS = [
     {
@@ -8,7 +9,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "lock.sel"]
         ],
         "key":"j",
-        "command":"vert.join false"
+        "command":"vert.join false",
+        "name":"Vertex Join"
     },
 
     {
@@ -16,7 +18,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "layer.new"]
         ],
         "key":"n",
-        "command":"layout.window ItemListAddPBViewPopover"
+        "command":"layout.window ItemListAddPBViewPopover",
+        "name":"New Item"
     },
 
     {
@@ -24,7 +27,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "layout_zen6_layout", None]
         ],
         "key":"ctrl-shift-space",
-        "command":"attr.formPopover {ZenPie_Frames:sheet}"
+        "command":"attr.formPopover {ZenPie_Frames:sheet}",
+        "name":"Layout Frames Pie"
     },
 
     {
@@ -32,7 +36,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "attr.formPopover {82203601151:sheet}"]
         ],
         "key":"alt-backquote",
-        "command":"viewport.maximize"
+        "command":"viewport.maximize",
+        "name":"Viewport Maximize"
     },
 
     {
@@ -41,7 +46,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", ".itemMode", None]
         ],
         "key":"v",
-        "command":"attr.formPopover {31757584531:sheet}"
+        "command":"attr.formPopover {31757584531:sheet}",
+        "name":"Zen Toolbox"
     },
 
     {
@@ -51,7 +57,8 @@ HOTKEYS = [
             ["view3DCamera", "(stateless)", ".anywhere", "(contextless)", "camera.goto"]
         ],
         "key":"g",
-        "command":"attr.formPopover {zen_palettesPopover:sheet}"
+        "command":"attr.formPopover {zen_palettesPopover:sheet}",
+        "name":"Zen Palettes List"
     },
 
     {
@@ -59,7 +66,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "tool.drop"]
         ],
         "key":"q",
-        "command":"zen.dropEverything"
+        "command":"zen.dropEverything",
+        "name":"Drop Everything"
     },
 
     {
@@ -67,7 +75,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "cmds.fireAgain uiCmds:false selectionCmds:false"]
         ],
         "key":"ctrl-r",
-        "command":"attr.formPopover {55281439258:sheet}"
+        "command":"attr.formPopover {55281439258:sheet}",
+        "name":"Recent Tools"
     },
 
     {
@@ -75,7 +84,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "tool.set actr.origin on"]
         ],
         "key":"alt-w",
-        "command":"attr.formPopover [ZenPie_Workplane:sheet]"
+        "command":"attr.formPopover [ZenPie_Workplane:sheet]",
+        "name":"Workplane Pie"
     },
 
     {
@@ -83,7 +93,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "tool.set actr.local on"]
         ],
         "key":"alt-x",
-        "command":"attr.formPopover {ZenPie_Snapping:sheet}"
+        "command":"attr.formPopover {ZenPie_Snapping:sheet}",
+        "name":"Snapping Pie"
     },
 
     {
@@ -92,7 +103,8 @@ HOTKEYS = [
             ["view3DTools", "tool.ink.image", ".anywhere", "(contextless)", None]
         ],
         "key":"alt-f",
-        "command":"attr.formPopover {ZenPie_Falloff:sheet}"
+        "command":"attr.formPopover {ZenPie_Falloff:sheet}",
+        "name":"Falloffs Pie"
     },
 
     {
@@ -100,7 +112,8 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "(contextless)", "tool.set actr.auto on"]
         ],
         "key":"alt-a",
-        "command":"attr.formPopover {ZenPie_ActionCtr:sheet}"
+        "command":"attr.formPopover {ZenPie_ActionCtr:sheet}",
+        "name":"Action Centers Pie"
     },
 
     {
@@ -109,7 +122,8 @@ HOTKEYS = [
             ["schematic", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"enter",
-        "command":"item.name"
+        "command":"item.name",
+        "name":"Item Rename"
     },
 
     {
@@ -120,7 +134,8 @@ HOTKEYS = [
             ["meshList_slot", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"enter",
-        "command":"layer.renameSelected"
+        "command":"layer.renameSelected",
+        "name":"Mesh Rename"
     },
 
     {
@@ -128,7 +143,8 @@ HOTKEYS = [
             ["shaderTree", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"enter",
-        "command":"texture.name"
+        "command":"texture.name",
+        "name":"Texture Rename"
     },
 
     {
@@ -136,7 +152,8 @@ HOTKEYS = [
             ["shaderTree", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"ctrl-d",
-        "command":"texture.duplicate"
+        "command":"texture.duplicate",
+        "name":"Texture Duplicate"
     },
 
     {
@@ -155,16 +172,30 @@ HOTKEYS = [
             ["meshList", "(stateless)", "cinemaName", "(contextless)", None]
         ],
         "key":"mmb",
-        "command":"attr.formPopover {itemprops:general}"
+        "command":"attr.formPopover {itemprops:general}",
+        "name":"Item Properties"
     }
 
 ]
 
 
-class CommandClass(lxu.command.BasicCommand):
+class CommandClass(CommanderClass):
+    def commander_arguments(self):
+        args = []
+        for n, hotkey in enumerate(HOTKEYS):
+            args.append({
+                'name':str(n),
+                'label':"%s \x03(c:25132927)(%s)" % (hotkey['name'], hotkey['key']),
+                'datatype':'boolean',
+                'default':True
+            })
+        return args
 
-    def cmd_Execute(self,flags):
-        for hotkey in HOTKEYS:
+    def commander_execute(self, msg, flags):
+        counter = 0
+        for n, hotkey in enumerate(HOTKEYS):
+            if not self.commander_arg_value(n):
+                continue
             command = hotkey["command"]
             key = hotkey["key"]
 
@@ -179,15 +210,16 @@ class CommandClass(lxu.command.BasicCommand):
                 except:
                     lx.out("Could not set '%s' to '%s'." % (command, key))
 
-        modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Zen documentation for details." % len(HOTKEYS))
-        lx.eval("OpenURL {kit_mecco_zen:Documentation/hotkeys.html}")
+            counter += 1
+
+        modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Help > Zen Hotkey Reference" % counter)
 
 lx.bless(CommandClass, "zen.mapDefaultHotkeys")
 
 
-class RemoveCommandClass(lxu.command.BasicCommand):
+class RemoveCommandClass(CommanderClass):
 
-    def cmd_Execute(self,flags):
+    def commander_execute(self,flags):
         for hotkey in HOTKEYS:
             key = hotkey["key"]
 
