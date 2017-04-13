@@ -5,27 +5,35 @@ import lx, lxifc, lxu.command
 FORMS = [
     {
         "label":"Zen Toolbox",
+        "recommended": "V",
         "hash":"31757584531:sheet"
     }, {
         "label":"Zen Palettes List",
+        "recommended": "G",
         "hash":"zen_palettesPopover:sheet"
     }, {
         "label":"Recent Tools",
+        "recommended": "ctrl-R",
         "hash":"55281439258:sheet"
     }, {
         "label":"Workplane Pie",
+        "recommended": "alt-W",
         "hash":"ZenPie_Workplane:sheet"
     }, {
         "label":"Snapping Pie",
+        "recommended": "alt-X",
         "hash":"ZenPie_Snapping:sheet"
     }, {
         "label":"Falloff Pie",
+        "recommended": "alt-F",
         "hash":"ZenPie_Falloff:sheet"
     }, {
         "label":"ActionCtr Pie",
+        "recommended": "alt-A",
         "hash":"ZenPie_ActionCtr:sheet"
     }, {
         "label":"Layout Frames Pie",
+        "recommended": "ctrl-shift-Space",
         "hash":"ZenPie_Frames:sheet"
     }
 ]
@@ -33,7 +41,7 @@ FORMS = [
 def list_commands():
     fcl = []
     for n, form in enumerate(sorted(FORMS, key=lambda k: k['label']) ):
-        fcl.append("zen.labeledPopover {%s} {%s}" % (form["hash"], form["label"]))
+        fcl.append("zen.labeledPopover {%s} {%s} {%s}" % (form["hash"], form["label"], form["recommended"]))
         fcl.append("zen.labeledMapKey {%s} {%s}" % (form["hash"], form["label"]))
 
         if n < len(FORMS)-1:

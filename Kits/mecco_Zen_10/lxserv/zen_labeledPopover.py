@@ -8,9 +8,10 @@ class CommandClass(lxu.command.BasicCommand):
 
         self.dyna_Add('hash', lx.symbol.sTYPE_STRING)
         self.dyna_Add('label', lx.symbol.sTYPE_STRING)
+        self.dyna_Add('recommended', lx.symbol.sTYPE_STRING)
 
     def basic_ButtonName(self):
-        return self.dyna_String(1)
+        return "%s \x03(c:25132927)(Recommended: %s)" % (self.dyna_String(1), self.dyna_String(2))
 
     def cmd_Execute(self,flags):
         lx.eval("attr.formPopover {%s}" % self.dyna_String(0))
