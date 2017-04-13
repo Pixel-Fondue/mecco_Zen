@@ -26,6 +26,13 @@ class CommandClass(CommanderClass):
         right_handed = self.commander_arg_value(0)
 
         lx.eval("user.value right_handed %s" % int(right_handed))
+        
+        if right_handed:
+            if lx.eval("viewport.hide ? tag zen6_presetBrowser_vpgrp_tag left zen6_upper_left_vptab_restore zen6_left_itemsTab_vpTag"):
+                lx.eval("viewport.hide hide tag zen6_presetBrowser_vpgrp_tag left zen6_upper_left_vptab_restore zen6_left_itemsTab_vpTag")
+        else:
+            if lx.eval("viewport.hide ? tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag"):
+                lx.eval("viewport.hide hide tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag")
 
         notifier = Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
