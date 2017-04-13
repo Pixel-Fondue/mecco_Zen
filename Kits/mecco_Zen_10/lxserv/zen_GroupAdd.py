@@ -7,8 +7,6 @@ CMD_NAME = 'zen.groupAdd_Popup'
 NEW = ('new', '(new group)')
 
 class CommandClass(CommanderClass):
-    _commander_default_values = []
-
     def commander_arguments(self):
         return [
                 {
