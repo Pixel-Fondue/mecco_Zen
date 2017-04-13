@@ -36,11 +36,13 @@ class CommandClass(CommanderClass):
             currentTool = None
             
             for tool in tools:
-                if lx.eval("viewport.hide ? tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore zen6_toolboxes_%s" % tool):
+                if lx.eval("viewport.hide ? tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s" % tool):
                     currentTool = tool
-                lx.eval("viewport.hide false tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore zen6_toolboxes_%s" % tool)
+                    
+            if not lx.eval("viewport.hide ? tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s"% currentTool):
+                lx.eval("viewport.hide true tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s"% currentTool)
                 
-            lx.eval("viewport.hide true tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore zen6_toolboxes_%s"% currentTool)
+            lx.eval("viewport.hide false tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left")
         else:
             if lx.eval("viewport.hide ? tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag"):
                 lx.eval("viewport.hide hide tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag")
@@ -48,11 +50,14 @@ class CommandClass(CommanderClass):
             currentTool = None
             
             for tool in tools:
-                if lx.eval("viewport.hide ? tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore zen6_toolboxes_%s" % tool):
+                if lx.eval("viewport.hide ? tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s" % tool):
                     currentTool = tool
-                lx.eval("viewport.hide false tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore zen6_toolboxes_%s" % tool)
+                    
+            lx.out("kuku ", currentTool)
+            if not lx.eval("viewport.hide ? tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s"% currentTool):
+                lx.eval("viewport.hide true tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s"% currentTool)
                 
-            lx.eval("viewport.hide true tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore zen6_toolboxes_%s"% currentTool)
+            lx.eval("viewport.hide false tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right")
 
         notifier = Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
