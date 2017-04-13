@@ -27,16 +27,16 @@ class myGreatCommand(lxu.command.BasicCommand):
         if not zen_version_from_config:
             modo.dialogs.alert(
                 "New Zen Install",
-                "New install of Zen detected. Set hotkeys and other prefs:\nPreferences > Mechanical Color > Zen UI"
+                "New install of Zen detected. Set hotkeys and other prefs: Preferences > Mechanical Color > Zen UI\nSee 'Help > Zen Release Notes' for more."
                 )
-            lx.eval("OpenURL {kit_mecco_zen:Documentation/release_notes.html}")
+            lx.eval('layout.window Preferences')
+            lx.eval('pref.select mecco/zen_ui_prefs set')
 
         elif zen_version_from_config != zen_version_installed:
             modo.dialogs.alert(
                 "New Zen Version",
-                "New version of Zen detected. Reset MODO prefs using:\nSystem > Reset Preferences"
+                "IMPORTANT: New version of Zen detected. Reset MODO prefs using:\nSystem > Reset Preferences"
                 )
-            lx.eval("OpenURL {kit_mecco_zen:Documentation/release_notes.html}")
 
         lx.eval("user.value zen_version %s" % zen_version_installed)
 
