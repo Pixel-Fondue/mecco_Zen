@@ -27,7 +27,7 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", "layout_zen6_layout", None]
         ],
         "key":"ctrl-shift-space",
-        "command":"attr.formPopover {ZenPie_Frames:sheet}",
+        "command":"zen.framesPie",
         "name":"Layout Frames Pie"
     },
 

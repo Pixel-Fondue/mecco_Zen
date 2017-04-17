@@ -5,6 +5,18 @@ from zen import CommanderClass
 
 CMD_NAME = 'zen.uiOrientation'
 
+def viewport_is_visible(tag, direction, restore_tag, tab_tag):
+    lx.out('viewport.hide ? tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag))
+    return lx.eval('viewport.hide ? tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag))
+
+def safely_hide_viewport(tag, direction, restore_tag):
+    if lx.eval('viewport.hide ? tag %s %s %s' % (tag, direction, restore_tag)):
+        lx.eval('viewport.hide false tag %s %s %s' % (tag, direction, restore_tag))
+
+def safely_show_viewport(tag, direction, restore_tag, tab_tag):
+    if not lx.eval('viewport.hide ? tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag)):
+        lx.eval('viewport.hide true tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag))
+
 class CommandClass(CommanderClass):
     def commander_arguments(self):
         return [
@@ -26,36 +38,42 @@ class CommandClass(CommanderClass):
 
         lx.eval("user.value right_handed %s" % int(right_handed))
 
-        tools = ["full_tag", "mini_tag", "miniFusion_tag", "miniPaint_tag", "miniSculpt_tag"]
+        frames = [
+            {
+                'frame_tag_left': 'zen6_listviews_left_tag',
+                'frame_tag_right': 'zen6_listviews_right_tag',
+                'restore_tag_left': 'zen6_listviews_left_restore',
+                'restore_tag_right': 'zen6_listviews_right_restore',
+                'tab_tags': ["zen6_toolProperties_vpTag", "zen6_itemsTab_vpTag", "zen6_meshOpsTab_vpTag", "zen6_presetBrowserTab_vpTag"]
+            }, {
+                'frame_tag_left': 'zen6_toolboxes_left_tag',
+                'frame_tag_right': 'zen6_toolboxes_right_tag',
+                'restore_tag_left': 'zen6_toolboxes_left_restore',
+                'restore_tag_right': 'zen6_toolboxes_right_restore',
+                'tab_tags': ["zen6_toolboxes_full_tag", "zen6_toolboxes_mini_tag", "zen6_toolboxes_miniFusion_tag", "zen6_toolboxes_miniPaint_tag", "zen6_toolboxes_miniSculpt_tag"]
+            }
+        ]
 
-        if right_handed:
-            if lx.eval("viewport.hide ? tag zen6_presetBrowser_vpgrp_tag left zen6_upper_left_vptab_restore zen6_left_itemsTab_vpTag"):
-                lx.eval("viewport.hide hide tag zen6_presetBrowser_vpgrp_tag left zen6_upper_left_vptab_restore zen6_left_itemsTab_vpTag")
+        for frame in frames:
+            hide_frame_tag = frame['frame_tag_left'] if right_handed else frame['frame_tag_right']
+            hide_restore_tag = frame['restore_tag_left'] if right_handed else frame['restore_tag_right']
+            hide_direction = 'left' if right_handed else 'right'
 
-            currentTool = None
+            show_frame_tag = frame['frame_tag_right'] if right_handed else frame['frame_tag_left']
+            show_restore_tag = frame['restore_tag_right'] if right_handed else frame['restore_tag_left']
+            show_direction = 'right' if right_handed else 'left'
 
-            for tool in tools:
-                if lx.eval("viewport.hide ? tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s" % tool):
-                    currentTool = tool
+            current_tab_tag = None
 
-            if not lx.eval("viewport.hide ? tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s"% currentTool):
-                lx.eval("viewport.hide true tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s"% currentTool)
-                
-            lx.eval("viewport.hide false tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left")
-        else:
-            if lx.eval("viewport.hide ? tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag"):
-                lx.eval("viewport.hide hide tag zen6_presetBrowser_vpgrp_tag_dup right zen6_upper_right_vptab_restore_dup zen6_left_itemsTab_vpTag")
+            for tab_tag in frame['tab_tags']:
+                if viewport_is_visible(hide_frame_tag, hide_direction, hide_restore_tag, tab_tag):
+                    current_tab_tag = tab_tag
+                    break
 
-            currentTool = None
+            safely_hide_viewport(hide_frame_tag, hide_direction, hide_restore_tag)
 
-            for tool in tools:
-                if lx.eval("viewport.hide ? tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right zen6_toolboxes_%s" % tool):
-                    currentTool = tool
-                    
-            if not lx.eval("viewport.hide ? tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s"% currentTool):
-                lx.eval("viewport.hide true tag zen6_toolboxes_left_tag left zen6_toolboxes_tag_restore_left zen6_toolboxes_%s"% currentTool)
-                
-            lx.eval("viewport.hide false tag zen6_toolboxes_right_tag right zen6_toolboxes_tag_restore_right")
+            if current_tab_tag is not None:
+                safely_show_viewport(show_frame_tag, show_direction, show_restore_tag, current_tab_tag)
 
         notifier = Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
