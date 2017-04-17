@@ -5,36 +5,44 @@ import lx, lxifc, lxu.command
 FORMS = [
     {
         "label":"Zen Toolbox",
-        "hash":"31757584531:sheet"
+        "recommended": "V",
+        "cmd":"attr.formPopover {31757584531:sheet}"
     }, {
         "label":"Zen Palettes List",
-        "hash":"zen_palettesPopover:sheet"
+        "recommended": "G",
+        "cmd":"attr.formPopover {zen_palettesPopover:sheet}"
     }, {
         "label":"Recent Tools",
-        "hash":"55281439258:sheet"
+        "recommended": "ctrl-R",
+        "cmd":"attr.formPopover {55281439258:sheet}"
     }, {
         "label":"Workplane Pie",
-        "hash":"ZenPie_Workplane:sheet"
+        "recommended": "alt-W",
+        "cmd":"attr.formPopover {ZenPie_Workplane:sheet}"
     }, {
         "label":"Snapping Pie",
-        "hash":"ZenPie_Snapping:sheet"
+        "recommended": "alt-X",
+        "cmd":"attr.formPopover {ZenPie_Snapping:sheet}"
     }, {
         "label":"Falloff Pie",
-        "hash":"ZenPie_Falloff:sheet"
+        "recommended": "alt-F",
+        "cmd":"attr.formPopover {ZenPie_Falloff:sheet}"
     }, {
         "label":"ActionCtr Pie",
-        "hash":"ZenPie_ActionCtr:sheet"
+        "recommended": "alt-A",
+        "cmd":"attr.formPopover {ZenPie_ActionCtr:sheet}"
     }, {
         "label":"Layout Frames Pie",
-        "hash":"ZenPie_Frames:sheet"
+        "recommended": "ctrl-shift-Space",
+        "cmd":"zen.framesPie"
     }
 ]
 
 def list_commands():
     fcl = []
     for n, form in enumerate(sorted(FORMS, key=lambda k: k['label']) ):
-        fcl.append("zen.labeledPopover {%s} {%s}" % (form["hash"], form["label"]))
-        fcl.append("zen.labeledMapKey {%s} {%s}" % (form["hash"], form["label"]))
+        fcl.append("zen.labeledPopover {%s} {%s} {%s}" % (form["cmd"], form["label"], form["recommended"]))
+        fcl.append("zen.labeledMapKey {%s} {%s}" % (form["cmd"], form["label"]))
 
         if n < len(FORMS)-1:
             fcl.append('- ')

@@ -7,8 +7,6 @@ CMD_NAME = 'zen.groupAdd_Popup'
 NEW = ('new', '(new group)')
 
 class CommandClass(CommanderClass):
-    _commander_default_values = []
-
     def commander_arguments(self):
         return [
                 {
@@ -43,7 +41,7 @@ class CommandClass(CommanderClass):
     def list_groups(self):
 
         groups_list = [NEW]
-        groups_list += sorted([(i.id, i.name) for i in modo.Scene().items('group')], key=lambda x: x[1])
+        groups_list += sorted([(i.id, i.name) for i in modo.Scene().iterItemsFast('group')], key=lambda x: x[1])
         return groups_list
 
 

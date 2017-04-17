@@ -1,201 +1,246 @@
 # python
 
 import lx, lxu, modo
+from zen import CommanderClass
 
 HOTKEYS = [
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "lock.sel"]
         ],
         "key":"j",
-        "command":"vert.join false"
+        "command":"vert.join false",
+        "name":"Vertex Join"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "layer.new"]
         ],
         "key":"n",
-        "command":"layout.window ItemListAddPBViewPopover"
+        "command":"layout.window ItemListAddPBViewPopover",
+        "name":"New Item"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "layout_zen6_layout"]
+            [".global", "(stateless)", ".anywhere", "layout_zen6_layout", None]
         ],
         "key":"ctrl-shift-space",
-        "command":"attr.formPopover {ZenPie_Frames:sheet}"
+        "command":"zen.framesPie",
+        "name":"Layout Frames Pie"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "attr.formPopover {82203601151:sheet}"]
         ],
         "key":"alt-backquote",
-        "command":"viewport.maximize"
+        "command":"viewport.maximize",
+        "name":"Viewport Maximize"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"],
-            [".global", "(stateless)", ".anywhere", ".itemMode"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "edge.spinQuads"],
+            [".global", "(stateless)", ".anywhere", ".itemMode", None]
         ],
         "key":"v",
-        "command":"attr.formPopover {31757584531:sheet}"
+        "command":"attr.formPopover {31757584531:sheet}",
+        "name":"Zen Toolbox"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"],
-            ["IView", "(stateless)", ".anywhere", "(contextless)"],
-            ["view3DCamera", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "viewport.goto"],
+            ["IView", "(stateless)", ".anywhere", "(contextless)", "camera.goto"],
+            ["view3DCamera", "(stateless)", ".anywhere", "(contextless)", "camera.goto"]
         ],
         "key":"g",
-        "command":"attr.formPopover {zen_palettesPopover:sheet}"
+        "command":"attr.formPopover {zen_palettesPopover:sheet}",
+        "name":"Zen Palettes List"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "tool.drop"]
         ],
         "key":"q",
-        "command":"zen.dropEverything"
+        "command":"zen.dropEverything",
+        "name":"Drop Everything"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "cmds.fireAgain uiCmds:false selectionCmds:false"]
         ],
         "key":"ctrl-r",
-        "command":"attr.formPopover {55281439258:sheet}"
+        "command":"attr.formPopover {55281439258:sheet}",
+        "name":"Recent Tools"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "tool.set actr.origin on"]
         ],
         "key":"alt-w",
-        "command":"attr.formPopover [ZenPie_Workplane:sheet]"
+        "command":"attr.formPopover [ZenPie_Workplane:sheet]",
+        "name":"Workplane Pie"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "tool.set actr.local on"]
         ],
         "key":"alt-x",
-        "command":"attr.formPopover {ZenPie_Snapping:sheet}"
+        "command":"attr.formPopover {ZenPie_Snapping:sheet}",
+        "name":"Snapping Pie"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"],
-            ["view3DTools", "tool.ink.image", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "tool.set actr.screen on"],
+            ["view3DTools", "tool.ink.image", ".anywhere", "(contextless)", None]
         ],
         "key":"alt-f",
-        "command":"attr.formPopover {ZenPie_Falloff:sheet}"
+        "command":"attr.formPopover {ZenPie_Falloff:sheet}",
+        "name":"Falloffs Pie"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "tool.set actr.auto on"]
         ],
         "key":"alt-a",
-        "command":"attr.formPopover {ZenPie_ActionCtr:sheet}"
+        "command":"attr.formPopover {ZenPie_ActionCtr:sheet}",
+        "name":"Action Centers Pie"
     },
 
     {
         "contexts":[
-            ["deformerList", "(stateless)", ".anywhere", "(contextless)"],
-            ["schematic", "(stateless)", ".anywhere", "(contextless)"]
+            ["deformerList", "(stateless)", ".anywhere", "(contextless)", None],
+            ["schematic", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"enter",
-        "command":"item.name"
+        "command":"item.name",
+        "name":"Item Rename"
     },
 
     {
         "contexts":[
-            [".global", "(stateless)", ".anywhere", "(contextless)"],
-            ["meshList", "(stateless)", ".anywhere", "(contextless)"],
-            ["meshList_inline", "(stateless)", ".anywhere", "(contextless)"],
-            ["meshList_slot", "(stateless)", ".anywhere", "(contextless)"]
+            [".global", "(stateless)", ".anywhere", "(contextless)", "cmds.focusCommandEntry"],
+            ["meshList", "(stateless)", ".anywhere", "(contextless)", None],
+            ["meshList_inline", "(stateless)", ".anywhere", "(contextless)", None],
+            ["meshList_slot", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"enter",
-        "command":"layer.renameSelected"
+        "command":"layer.renameSelected",
+        "name":"Mesh Rename"
     },
 
     {
         "contexts":[
-            ["shaderTree", "(stateless)", ".anywhere", "(contextless)"]
+            ["shaderTree", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"enter",
-        "command":"texture.name"
+        "command":"texture.name",
+        "name":"Texture Rename"
     },
 
     {
         "contexts":[
-            ["shaderTree", "(stateless)", ".anywhere", "(contextless)"]
+            ["shaderTree", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"ctrl-d",
-        "command":"texture.duplicate"
+        "command":"texture.duplicate",
+        "name":"Texture Duplicate"
     },
 
     {
         "contexts":[
-            ["view3DSelect", "(stateless)", "item", "(contextless)"],
-            ["shaderTree", "(stateless)", ".anywhere", "(contextless)"],
-            ["deformerList", "(stateless)", ".anywhere", "(contextless)"],
-            ["schematic", "(stateless)", ".anywhere", "(contextless)"],
-            ["meshList", "(stateless)", "meshoperation", "(contextless)"],
-            ["meshList", "(stateless)", "deformName", "(contextless)"],
-            ["meshList", "(stateless)", "chanEffect", "(contextless)"],
-            ["meshList", "(stateless)", "chanModify", "(contextless)"],
-            ["meshList", "(stateless)", "itemModify", "(contextless)"],
-            ["meshList", "(stateless)", "itemRef", "(contextless)"],
-            ["meshList", "(stateless)", "cinemaRef", "(contextless)"],
-            ["meshList", "(stateless)", "cinemaName", "(contextless)"]
+            ["view3DSelect", "(stateless)", "item", "(contextless)", "attr.formPopover {itemprops:general}"],
+            ["shaderTree", "(stateless)", ".anywhere", "(contextless)", None],
+            ["deformerList", "(stateless)", ".anywhere", "(contextless)", None],
+            ["schematic", "(stateless)", ".anywhere", "(contextless)", None],
+            ["meshList", "(stateless)", "meshoperation", "(contextless)", None],
+            ["meshList", "(stateless)", "deformName", "(contextless)", None],
+            ["meshList", "(stateless)", "chanEffect", "(contextless)", None],
+            ["meshList", "(stateless)", "chanModify", "(contextless)", None],
+            ["meshList", "(stateless)", "itemModify", "(contextless)", None],
+            ["meshList", "(stateless)", "itemRef", "(contextless)", None],
+            ["meshList", "(stateless)", "cinemaRef", "(contextless)", None],
+            ["meshList", "(stateless)", "cinemaName", "(contextless)", None]
         ],
         "key":"mmb",
-        "command":"attr.formPopover {itemprops:general}"
+        "command":"attr.formPopover {itemprops:general}",
+        "name":"Item Properties"
     }
 
 ]
 
 
-class CommandClass(lxu.command.BasicCommand):
+class CommandClass(CommanderClass):
+    def commander_arguments(self):
+        args = []
+        for n, hotkey in enumerate(HOTKEYS):
+            args.append({
+                'name':str(n),
+                'label':"%s \x03(c:25132927)(%s)" % (hotkey['name'], hotkey['key']),
+                'datatype':'boolean',
+                'default':True
+            })
+        return args
 
-    def cmd_Execute(self,flags):
-        for hotkey in HOTKEYS:
+    def commander_execute(self, msg, flags):
+        counter = 0
+        for n, hotkey in enumerate(HOTKEYS):
+            if not self.commander_arg_value(n):
+                continue
             command = hotkey["command"]
             key = hotkey["key"]
 
-            for context in hotkey["contexts"]:
-                mapping = context[0]
-                state = context[1]
-                region = context[2]
-                context = context[3]
+            for context_list in hotkey["contexts"]:
+                mapping = context_list[0]
+                state = context_list[1]
+                region = context_list[2]
+                context = context_list[3]
 
-                lx.eval('!cmds.mapKey {%s} {%s} {%s} {%s} {%s} {%s}' % (key, command, mapping, state, region, context))
+                try:
+                    lx.eval('!cmds.mapKey {%s} {%s} {%s} {%s} {%s} {%s}' % (key, command, mapping, state, region, context))
+                except:
+                    lx.out("Could not set '%s' to '%s'." % (command, key))
 
-        modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Zen documentation for details." % len(HOTKEYS))
-        lx.eval("OpenURL {kit_mecco_zen:Documentation/hotkeys.html}")
+            counter += 1
+
+        modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Help > Zen Hotkey Reference" % counter)
 
 lx.bless(CommandClass, "zen.mapDefaultHotkeys")
 
 
-class RemoveCommandClass(lxu.command.BasicCommand):
+class RemoveCommandClass(CommanderClass):
 
-    def cmd_Execute(self,flags):
+    def commander_execute(self,flags):
         for hotkey in HOTKEYS:
             key = hotkey["key"]
 
-            for context in hotkey["contexts"]:
-                mapping = context[0]
-                state = context[1]
-                region = context[2]
-                context = context[3]
+            for context_list in hotkey["contexts"]:
+                mapping = context_list[0]
+                state = context_list[1]
+                region = context_list[2]
+                context = context_list[3]
+                default = context_list[4]
 
-                lx.eval('!cmds.clearKey {%s} {%s} {%s} {%s} {%s}' % (key, mapping, state, region, context))
+                if default is None:
+                    try:
+                        lx.eval('!cmds.clearKey {%s} {%s} {%s} {%s} {%s}' % (key, mapping, state, region, context))
+                    except:
+                        lx.out("Could not clear mapping for '%s'." % key)
+                else:
+                    try:
+                        lx.eval('!cmds.mapKey {%s} {%s} {%s} {%s} {%s} {%s}' % (key, default, mapping, state, region, context))
+                    except:
+                        lx.out("Could not set '%s' to '%s'." % (default, key))
 
-        modo.dialogs.alert("Cleared Zen Hotkeys", "Cleared %s Zen hotkeys." % len(HOTKEYS))
+        modo.dialogs.alert("Reverted Zen Hotkeys", "Reverted %s Zen hotkeys to defaults." % len(HOTKEYS))
 
 lx.bless(RemoveCommandClass, "zen.unmapDefaultHotkeys")

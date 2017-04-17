@@ -7,8 +7,6 @@ CMD_NAME = 'zen.groupRemove_Popup'
 ALL = ('all', '(remove from all)')
 
 class CommandClass(CommanderClass):
-    _commander_default_values = []
-
     def commander_arguments(self):
         return [
                 {
