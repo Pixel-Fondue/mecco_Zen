@@ -4,6 +4,26 @@ import lx, modo, lxu.command, traceback, lxifc
 
 CMD_NAME = 'zen.topoMode'
 
+restore_shade_modes = [
+    {
+        'cmd': 'view3d.shadingStyle %s active',
+        'value': None,
+        'topo_value': 'shade'
+    },{
+        'cmd': 'view3d.wireframeOverlay %s active',
+        'value': None,
+        'topo_value': 'colored'
+    },{
+        'cmd': 'view3d.shadingStyle %s inactive',
+        'value': None,
+        'topo_value': 'shade'
+    },{
+        'cmd': 'view3d.wireframeOverlay %s inactive',
+        'value': None,
+        'topo_value': 'none'
+    }
+]
+
 class myGreatCommand(lxu.command.BasicCommand):
 
     def __init__(self):
@@ -26,10 +46,35 @@ class myGreatCommand(lxu.command.BasicCommand):
 
         if state == 0:
 
+            for mode in restore_shade_modes:
+                try:
+                    mode['topo_value'] = lx.eval(mode['cmd'] % '?')
+                except:
+                    pass
+
+                if mode['value'] is None:
+                    continue
+
+                try:
+                    lx.eval("!!" + mode['cmd'] % mode['value'])
+                except:
+                    pass
+
             lx.eval('tool.set const.bg off')
             lx.eval('view3d.topology 0')
 
         if state == 1:
+
+            for mode in restore_shade_modes:
+                try:
+                    mode['value'] = lx.eval(mode['cmd'] % '?')
+                except:
+                    pass
+
+                try:
+                    lx.eval(mode['cmd'] % mode['topo_value'])
+                except:
+                    pass
 
             lx.eval('tool.set const.bg on')
             lx.eval('tool.attr const.bg geometry point')

@@ -6,7 +6,6 @@ from zen import CommanderClass
 CMD_NAME = 'zen.uiOrientation'
 
 def viewport_is_visible(tag, direction, restore_tag, tab_tag):
-    lx.out('viewport.hide ? tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag))
     return lx.eval('viewport.hide ? tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag))
 
 def safely_hide_viewport(tag, direction, restore_tag):
