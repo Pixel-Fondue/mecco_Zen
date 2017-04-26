@@ -2,7 +2,7 @@
 
 import lx, lxifc, lxu
 from zen import CommanderClass
-from zen import Notifier
+from zen.Notifier import Notifier
 
 CMD_NAME = 'zen.uiOrientation'
 
@@ -83,11 +83,9 @@ class CommandClass(CommanderClass):
 
         if index == 0:
             if invert:
-                return lx.eval("user.value right_handed ?")
+                return not lx.eval("user.value right_handed ?")
             else:
                 return lx.eval("user.value right_handed ?")
-
-        return lx.result.OK
 
     def commander_notifiers(self):
         return [("zen.notifier", "")]
