@@ -24,6 +24,7 @@ TOOLBOXES = sorted([
     ('setup', 'Setup'),
     ('commandRegions', 'Command Regions'),
     ('ik', 'Inverse Kinematics'),
+    ('topo', 'Retopology'),
     ('modifiers', 'Modifiers')
 ])
 
