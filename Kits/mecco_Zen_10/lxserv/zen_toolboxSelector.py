@@ -23,7 +23,8 @@ TOOLBOXES = sorted([
     ('particles', 'Particles'),
     ('setup', 'Setup'),
     ('commandRegions', 'Command Regions'),
-    ('ik', 'Inverse Kinematics')
+    ('ik', 'Inverse Kinematics'),
+    ('modifiers', 'Modifiers')
 ])
 
 CURRENT_TOOLBOX = 'context'
