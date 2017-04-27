@@ -51,6 +51,12 @@ class CommandClass(CommanderClass):
                 'restore_tag_left': 'zen6_toolboxes_left_restore',
                 'restore_tag_right': 'zen6_toolboxes_right_restore',
                 'tab_tags': ["zen6_toolboxes_full_tag", "zen6_toolboxes_mini_tag", "zen6_toolboxes_miniFusion_tag", "zen6_toolboxes_miniPaint_tag", "zen6_toolboxes_miniSculpt_tag"]
+            }, {
+                'frame_tag_left': 'zen6_itemsTab_propsTabs_left_tag',
+                'frame_tag_right': 'zen6_itemsTab_propsTabs_right_tag',
+                'restore_tag_left': 'zen6_itemsTab_propsTabs_left_restore',
+                'restore_tag_right': 'zen6_itemsTab_propsTabs_right_restore',
+                'tab_tags': ["zen6_properties_vpGrp_tag", "zen6_channels_vpGrp_tag"]
             }
         ]
 
