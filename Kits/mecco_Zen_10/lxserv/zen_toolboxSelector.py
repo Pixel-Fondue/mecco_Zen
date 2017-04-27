@@ -27,8 +27,6 @@ TOOLBOXES = sorted([
     ('modifiers', 'Modifiers')
 ])
 
-CURRENT_TOOLBOX = 'context'
-
 class CommandClass(CommanderClass):
     def commander_arguments(self):
         return [
@@ -46,20 +44,17 @@ class CommandClass(CommanderClass):
             ]
 
     def commander_execute(self, msg, flags):
-        toolbox = self.commander_arg_value(0)
-
-        global CURRENT_TOOLBOX
-        CURRENT_TOOLBOX = toolbox
+        lx.eval("user.value zen_current_toolbox %s" % self.commander_arg_value(0))
 
         notifier = Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
 
     def commander_query(self, index):
         if index == 0:
-            return CURRENT_TOOLBOX
+            return lx.eval("user.value zen_current_toolbox ?")
         elif index == 1:
             toolbox_to_check = self.commander_arg_value(0)
-            if CURRENT_TOOLBOX == toolbox_to_check:
+            if lx.eval("user.value zen_current_toolbox ?") == toolbox_to_check:
                 return True
             else:
                 return False
