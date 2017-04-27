@@ -107,3 +107,9 @@ ul.arguments li li {
 	width: 100%;
 	height: 100%;
 }
+
+div.alert {
+  background-color:#eee;
+  color:red;
+  padding:2em;
+}
