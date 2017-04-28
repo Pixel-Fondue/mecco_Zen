@@ -28,6 +28,12 @@ TOOLBOXES = sorted([
     ('modifiers', 'Modifiers')
 ])
 
+def form_command_list():
+    fcl = []
+    for toolbox in TOOLBOXES:
+        fcl.append('zen.toolboxSelector {%s}' % toolbox[0])
+    return fcl
+
 class CommandClass(CommanderClass):
     def commander_arguments(self):
         return [
@@ -40,6 +46,12 @@ class CommandClass(CommanderClass):
                 }, {
                     'name': 'is_enabled',
                     'datatype': 'boolean',
+                    'flags': ['query', 'optional', 'hidden'],
+                }, {
+                    'name': 'fcl',
+                    'datatype': 'string',
+                    'values_list': form_command_list,
+                    'values_list_type': 'fcl',
                     'flags': ['query', 'optional', 'hidden'],
                 }
             ]
@@ -59,8 +71,17 @@ class CommandClass(CommanderClass):
                 return True
             else:
                 return False
+        elif index == 2:
+            return lx.result.OK
 
     def commander_notifiers(self):
         return [("zen.notifier", "")]
+
+    def basic_ButtonName(self):
+        toolbox_to_check = self.commander_args()['toolbox']
+        if toolbox_to_check:
+            for toolbox in TOOLBOXES:
+                if toolbox[0] == toolbox_to_check:
+                    return toolbox[1]
 
 lx.bless(CommandClass, CMD_NAME)
