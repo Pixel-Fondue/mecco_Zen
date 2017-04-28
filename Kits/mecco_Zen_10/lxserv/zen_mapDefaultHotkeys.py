@@ -219,7 +219,7 @@ lx.bless(CommandClass, "zen.mapDefaultHotkeys")
 
 class RemoveCommandClass(CommanderClass):
 
-    def commander_execute(self,flags):
+    def commander_execute(self, msg, flags):
         for hotkey in HOTKEYS:
             key = hotkey["key"]
 

@@ -5,6 +5,7 @@ import modo
 def get_camera_id():
     try:
         renderCamera = lx.eval("render.camera ?")
+        return renderCamera
     except:
         pass
 
