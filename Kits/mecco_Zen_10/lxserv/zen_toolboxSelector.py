@@ -8,6 +8,7 @@ CMD_NAME = 'zen.toolboxSelector'
 
 TOOLBOXES = sorted([
     ('context', 'Context'),
+    ('curves', 'Curves'),
     ('fusion', 'Fusion'),
     ('uv', 'UV'),
     ('paint', 'Paint'),
