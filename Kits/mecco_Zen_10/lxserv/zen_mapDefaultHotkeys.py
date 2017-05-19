@@ -128,7 +128,8 @@ HOTKEYS = [
     {
         "contexts":[
             ["deformerList", "(stateless)", ".anywhere", "(contextless)", None],
-            ["schematic", "(stateless)", ".anywhere", "(contextless)", None]
+            ["schematic", "(stateless)", ".anywhere", "(contextless)", None],
+            ["vpgroups", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"enter",
         "command":"item.name",
