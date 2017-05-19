@@ -6,7 +6,7 @@ FORMS = [
     {
         "label":"Zen Toolbox",
         "recommended": "V",
-        "cmd":"attr.formPopover {31757584531:sheet}"
+        "cmd":"attr.formPopover {zen_toolbox_full}"
     }, {
         "label":"Zen Palettes List",
         "recommended": "G",

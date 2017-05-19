@@ -1,0 +1,79 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Zen Developer Docs</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/boilerplate.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <h1>Zen Developer Docs</h1>
+
+        <p>To develop for Zen, definitely <a href="mailto:adam@mechanicalcolor.com">get in touch</a> before you start. Things should be pretty straightforward in general, but knowing what you're doing will help ensure I don't break your work by accident with future changes.</p>
+
+        <p>I avoid changing form hashes as much as possible, but they do occasionally change.</p>
+
+        <p>The safest ways to add toolboxes to Zen are:</p>
+        <ol>
+          <li>Append the normal <a href="http://sdk.luxology.com/wiki/Create_A_Custom_Form#Insert_The_Form">MODO modes tail</a> with your own subform or...</li>
+          <li>Register a custom Zen toolbox for use in the main 'V' key popover and the 'mini' toolbar at left.</li>
+        </ol>
+        <p>The former method is recommended for most plugins, since it works equally well in both Zen and the traditional MODO layouts.</p>
+        <p>For greater integration within Zen, registering a toolbox for use in the 'V' key and 'mini' toolbars is easy, but non-obvious.</p>
+        <p>There are several steps required to register a custom Zen toolbox:</p>
+        <ul>
+          <li>Use Python to register the toolbar with <code>zen.Toolboxes</code> for display in the toolboxes menu</li>
+          <li>Use a config file XML to append your form to the toolbox tail categories (there are two)</li>
+          <li>Add <code>zen.toolboxSelector yourToolboxName ?</code> as a FilterCommand for your form</li>
+        </ul>
+        <p>As mentioned above, there are two places toolboxes are displayed: the full-size 'V' key toolbox, and the smaller vertical 'mini' toolbox.
+          For most toolboxes, a single vertical toolbar serves both purposes. In some cases, you may want to lay out two separate forms: one for the full-size
+          toolbox, and another for the smaller one. The example boilerplate below will assume the simpler case.</p>
+
+        <p>Add the following to an <code>lxserv</code> folder in your kit:</p>
+
+<pre>
+# python
+try:
+    # Try to import zen. If Zen isn't installed, we pass.
+    import zen
+
+    # registers toolbox to the toolboxes list
+    zen.Toolboxes().add('yourToolboxName', 'Your Toolbox Label')
+
+except:
+    pass
+</pre>
+
+      <p>Then add a config file with the following form:</p>
+
+<pre>
+&lt;hash type="Sheet" key="yourToolboxName:sheet"&gt;
+  &lt;atom type="Label"&gt;Your Toolbox Label&lt;/atom&gt;
+  &lt;atom type="ShowLabel"&gt;0&lt;/atom&gt;
+  &lt;atom type="Layout"&gt;vtoolbar&lt;/atom&gt;
+
+  &lt;!-- Append your form to the mini toolbox --&gt;
+  &lt;hash type="InCategory" key="zen6_tools_mini#tail"&gt;
+    &lt;atom type="Ordinal"&gt;50.50.50&lt;/atom&gt;
+  &lt;/hash&gt;
+
+  &lt;!-- Append your form to the full size toolbox --&gt;
+  &lt;hash type="InCategory" key="zen_toolbox_full#tail"&gt;
+    &lt;atom type="Ordinal"&gt;50.50.50&lt;/atom&gt;
+  &lt;/hash&gt;
+
+  &lt;!-- This is the magic: when the user selects your toolbox from the menu,
+  this query will return True, causing your form to appear. When they select
+  something else, it will return False, and your form will be hidden. --&gt;
+  &lt;atom type="FilterCommand"&gt;zen.toolboxSelector yourToolboxName ?&lt;/atom&gt;
+
+  &lt;!-- Put your commands here. --&gt;
+  &lt;list type="Control" val="cmd render" /&gt;
+&lt;/hash&gt;
+</pre>
+    </body>
+</html>

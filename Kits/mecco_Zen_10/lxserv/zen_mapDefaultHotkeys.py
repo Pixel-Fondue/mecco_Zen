@@ -55,7 +55,7 @@ HOTKEYS = [
             [".global", "(stateless)", ".anywhere", ".itemMode", None]
         ],
         "key":"v",
-        "command":"attr.formPopover {31757584531:sheet}",
+        "command":"attr.formPopover {zen_toolbox_full}",
         "name":"Zen Toolbox"
     },
 

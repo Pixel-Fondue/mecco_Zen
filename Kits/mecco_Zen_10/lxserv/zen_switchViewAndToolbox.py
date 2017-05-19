@@ -1,12 +1,11 @@
 # python
 
 import lx, lxifc, lxu
-from zen import CommanderClass
-from zen.Notifier import Notifier
+import zen
 
 CMD_NAME = 'zen.switchViewAndToolbox'
 
-class CommandClass(CommanderClass):
+class CommandClass(zen.CommanderClass):
     def commander_arguments(self):
         return [
                 {
