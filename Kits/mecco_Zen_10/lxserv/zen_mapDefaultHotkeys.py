@@ -15,6 +15,15 @@ HOTKEYS = [
 
     {
         "contexts":[
+            ["view3DOverlay3D", "(stateless)", ".anywhere", "(contextless)", "attr.formPopover {27036209057:sheet}"]
+        ],
+        "key":"o",
+        "command":"attr.formPopover {zen_viewportProperties_with_views:sheet}",
+        "name":"Viewport Properties"
+    },
+
+    {
+        "contexts":[
             [".global", "(stateless)", ".anywhere", "(contextless)", "layer.new"]
         ],
         "key":"n",
