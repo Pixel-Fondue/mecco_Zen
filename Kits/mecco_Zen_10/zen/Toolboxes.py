@@ -27,6 +27,7 @@ class Toolboxes(object):
         ('commandRegions', 'Command Regions'),
         ('ik', 'Inverse Kinematics'),
         ('topo', 'Retopology'),
+        ('render', 'Render'),
         ('modifiers', 'Modifiers')
     ]
 
