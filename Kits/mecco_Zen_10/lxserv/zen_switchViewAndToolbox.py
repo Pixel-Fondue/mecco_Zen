@@ -14,6 +14,10 @@ class CommandClass(zen.CommanderClass):
                 }, {
                     'name': 'toolboxName',
                     'datatype': 'string'
+                }, {
+                    'name': 'isLatest',
+                    'datatype': 'boolean',
+                    'flags': ['query', 'optional']
                 }
             ]
 
@@ -21,8 +25,13 @@ class CommandClass(zen.CommanderClass):
         try:
             lx.eval('viewport.tabWithTag %s' % self.commander_arg_value(0))
             lx.eval('zen.toolboxSelector %s' % self.commander_arg_value(1))
+            lx.eval("user.value zen_latest_viewport %s" % self.commander_arg_value(0))
         except:
             pass
+
+    def commander_query(self, index):
+        if index == 2:
+            return self.commander_arg_value(0) == lx.eval("user.value zen_latest_viewport ?")
 
 
 lx.bless(CommandClass, CMD_NAME)
