@@ -1,46 +1,23 @@
 # python
 
 import lx, lxifc, lxu
-from zen import CommanderClass
-from zen.Notifier import Notifier
+import zen
 
 CMD_NAME = 'zen.toolboxSelector'
 
-TOOLBOXES = sorted([
-    ('context', 'Context'),
-    ('fusion', 'Fusion'),
-    ('uv', 'UV'),
-    ('paint', 'Paint'),
-    ('sculpt', 'Sculpt'),
-    ('animate', 'Animate'),
-    ('game', 'Game'),
-    ('actors', 'Actors'),
-    ('deformers', 'Deformers'),
-    ('dynamics', 'Dynamics'),
-    ('particlePaint', 'Particle Paint'),
-    ('vmap', 'Vertex Maps'),
-    ('hair', 'Hair'),
-    ('particles', 'Particles'),
-    ('setup', 'Setup'),
-    ('commandRegions', 'Command Regions'),
-    ('ik', 'Inverse Kinematics'),
-    ('topo', 'Retopology'),
-    ('modifiers', 'Modifiers')
-])
-
 def form_command_list():
     fcl = []
-    for toolbox in TOOLBOXES:
+    for toolbox in zen.Toolboxes().get():
         fcl.append('zen.toolboxSelector {%s}' % toolbox[0])
     return fcl
 
-class CommandClass(CommanderClass):
+class CommandClass(zen.CommanderClass):
     def commander_arguments(self):
         return [
                 {
                     'name': 'toolbox',
                     'datatype': 'string',
-                    'values_list': TOOLBOXES,
+                    'values_list': zen.Toolboxes().get,
                     'values_list_type': 'popup',
                     'flags': ['query'],
                 }, {
@@ -59,7 +36,7 @@ class CommandClass(CommanderClass):
     def commander_execute(self, msg, flags):
         lx.eval("user.value zen_current_toolbox %s" % self.commander_arg_value(0))
 
-        notifier = Notifier()
+        notifier = zen.Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
 
     def commander_query(self, index):
@@ -80,7 +57,7 @@ class CommandClass(CommanderClass):
     def basic_ButtonName(self):
         toolbox_to_check = self.commander_args()['toolbox']
         if toolbox_to_check:
-            for toolbox in TOOLBOXES:
+            for toolbox in zen.Toolboxes().get():
                 if toolbox[0] == toolbox_to_check:
                     return toolbox[1]
 

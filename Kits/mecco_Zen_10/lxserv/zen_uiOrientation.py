@@ -1,8 +1,7 @@
 # python
 
 import lx, lxifc, lxu
-from zen import CommanderClass
-from zen.Notifier import Notifier
+import zen
 
 CMD_NAME = 'zen.uiOrientation'
 
@@ -17,7 +16,7 @@ def safely_show_viewport(tag, direction, restore_tag, tab_tag):
     if not lx.eval('viewport.hide ? tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag)):
         lx.eval('viewport.hide true tag %s %s %s %s' % (tag, direction, restore_tag, tab_tag))
 
-class CommandClass(CommanderClass):
+class CommandClass(zen.CommanderClass):
     def commander_arguments(self):
         return [
                 {
@@ -81,7 +80,7 @@ class CommandClass(CommanderClass):
             if current_tab_tag is not None:
                 safely_show_viewport(show_frame_tag, show_direction, show_restore_tag, current_tab_tag)
 
-        notifier = Notifier()
+        notifier = zen.Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
 
     def commander_query(self, index):

@@ -3,7 +3,7 @@ body {
   width:720px;
   margin:2em auto;
   color:#666;
-  line-height: 1.5em;
+  line-height: 1.7em;
 }
 
 h1, h2, h3, h4 {
@@ -24,6 +24,10 @@ hr {
 
 strong {
   color:#333;
+}
+
+p {
+  margin-bottom: 2em;
 }
 
 a {
@@ -57,6 +61,12 @@ div.definition {
 code {
   color:#c22980;
   font-size:1.2em;
+}
+
+pre {
+  background-color: #eee;
+  padding: 1em;
+  margin: 2em 0;
 }
 
 .keystroke {
