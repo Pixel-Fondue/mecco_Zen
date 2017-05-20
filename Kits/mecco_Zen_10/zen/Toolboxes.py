@@ -44,7 +44,7 @@ class Toolboxes(object):
         :param name:    (str) the internal name for the toolbox
         :param label:   (str) the pretty name for the toolbox (displayed in menus)
         """
-        self._toolboxes.append((name, label))
+        cls._toolboxes.append((name, label))
 
     def get(self):
         """Returns a list of all registered toolboxes. Returned as tuples
