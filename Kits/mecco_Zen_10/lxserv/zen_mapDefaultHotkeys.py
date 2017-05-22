@@ -179,7 +179,8 @@ HOTKEYS = [
             ["meshList", "(stateless)", "itemModify", "(contextless)", None],
             ["meshList", "(stateless)", "itemRef", "(contextless)", None],
             ["meshList", "(stateless)", "cinemaRef", "(contextless)", None],
-            ["meshList", "(stateless)", "cinemaName", "(contextless)", None]
+            ["meshList", "(stateless)", "cinemaName", "(contextless)", None],
+            ["vpgroups", "(stateless)", ".anywhere", "(contextless)", None]
         ],
         "key":"mmb",
         "command":"attr.formPopover {itemprops:general}",
