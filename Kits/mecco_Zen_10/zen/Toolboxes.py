@@ -10,7 +10,7 @@ class Toolboxes(object):
     _toolboxes = [
         ('context', 'Context'),
         ('curves', 'Curves'),
-        ('fusion', 'Fusion'),
+        ('fusion', 'Mesh Fusion'),
         ('uv', 'UV'),
         ('paint', 'Paint'),
         ('sculpt', 'Sculpt'),
@@ -49,4 +49,4 @@ class Toolboxes(object):
     def get(self):
         """Returns a list of all registered toolboxes. Returned as tuples
         in the format (name, label)"""
-        return sorted(self._toolboxes)
+        return sorted(self._toolboxes, key=lambda x: x[1])
