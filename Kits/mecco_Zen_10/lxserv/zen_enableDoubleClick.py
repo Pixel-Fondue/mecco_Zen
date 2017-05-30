@@ -1,44 +1,63 @@
 # python
 
 import lx, lxu, modo
+import zen
 
-class CommandClass(lxu.command.BasicCommand):
+class CommandClass(zen.CommanderClass):
 
-    def cmd_Execute(self,flags):
+    def commander_arguments(self):
+        return [
+                {
+                    'name': 'enabled',
+                    'label': 'Enable Zen Double-Click',
+                    'datatype': 'boolean',
+                    'default': False,
+                    'flags': ['query']
+                }
+            ]
 
-        safety = modo.dialogs.yesNo("Not Recommended", "Zen Double-Click has unresolved problems, and it's currently not recommended. Are you sure you want to use it?")
+    def commander_execute(self, msg, flags):
 
-        if safety == "no":
-            return
+        if self.commander_arg_value(0):
 
-        command = "zen.doubleClick"
-        key = "lmb-dblclick"
-        mapping = "view3DSelect"
-        state = "(stateless)"
-        region = ".anywhere"
-        context = "(contextless)"
+            safety = modo.dialogs.yesNo("Not Recommended", "Zen Double-Click has unresolved problems, and it's currently not recommended. Are you sure you want to use it?")
 
-        lx.eval('!cmds.mapKey {%s} {%s} {%s} {%s} {%s} {%s}' % (key, command, mapping, state, region, context))
-        lx.eval('pref.value opengl.mouseRegionsSelect false')
+            if safety == "no":
+                return
 
-        modo.dialogs.alert("Mapped Zen Double-Click", "Double-click in a 3D viewport\nis now mapped to 'zen.doubleClick', and\nPreferences > OpenGL > Selection > Mouse Regions Trigger Selection\nis now disabled.")
-        lx.eval("OpenURL {kit_mecco_zen:Documentation/doubleclick.html}")
+            command = "zen.doubleClick"
+            key = "lmb-dblclick"
+            mapping = "view3DSelect"
+            state = "(stateless)"
+            region = ".anywhere"
+            context = "(contextless)"
 
-lx.bless(CommandClass, "zen.enableZenDoubleClick")
+            lx.eval('!cmds.mapKey {%s} {%s} {%s} {%s} {%s} {%s}' % (key, command, mapping, state, region, context))
+            lx.eval('pref.value opengl.mouseRegionsSelect false')
 
-class RemoveCommandClass(lxu.command.BasicCommand):
+            lx.eval("user.value zen_double_click true")
 
-    def cmd_Execute(self,flags):
-        command = ""
-        key = "lmb-dblclick"
-        mapping = "view3DSelect"
-        state = "(stateless)"
-        region = ".anywhere"
-        context = "(contextless)"
+            modo.dialogs.alert("Mapped Zen Double-Click", "Double-click in a 3D viewport\nis now mapped to 'zen.doubleClick', and\nPreferences > OpenGL > Selection > Mouse Regions Trigger Selection\nis now disabled.")
+            lx.eval("OpenURL {kit_mecco_zen:Documentation/doubleclick.html}")
 
-        lx.eval('!cmds.clearKey {%s} {%s} {%s} {%s} {%s}' % (key, mapping, state, region, context))
-        lx.eval('pref.value opengl.mouseRegionsSelect true')
+        else:
 
-        modo.dialogs.alert("Mapped Zen Double-Click", "Zen Double-Click has been disabled, and \nPreferences > OpenGL > Selection > Mouse Regions Trigger Selection\nis now enabled.")
+            command = ""
+            key = "lmb-dblclick"
+            mapping = "view3DSelect"
+            state = "(stateless)"
+            region = ".anywhere"
+            context = "(contextless)"
 
-lx.bless(RemoveCommandClass, "zen.disableZenDoubleClick")
+            lx.eval('!cmds.clearKey {%s} {%s} {%s} {%s} {%s}' % (key, mapping, state, region, context))
+            lx.eval('pref.value opengl.mouseRegionsSelect true')
+
+            lx.eval("user.value zen_double_click false")
+
+            modo.dialogs.alert("Mapped Zen Double-Click", "Zen Double-Click has been disabled, and \nPreferences > OpenGL > Selection > Mouse Regions Trigger Selection\nis now enabled.")
+
+    def commander_query(self, index):
+        if index == 0:
+            return lx.eval("user.value zen_double_click ?")
+
+lx.bless(CommandClass, "zen.zenDoubleClick")

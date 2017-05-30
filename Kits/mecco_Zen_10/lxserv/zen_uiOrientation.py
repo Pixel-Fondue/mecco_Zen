@@ -20,6 +20,10 @@ class CommandClass(zen.CommanderClass):
     def commander_arguments(self):
         return [
                 {
+                    'name': 'element',
+                    'datatype': 'string',
+                    'default': 'toolboxes'
+                }, {
                     'name': 'is_right_handed',
                     'datatype': 'boolean',
                     'default': True,
@@ -33,31 +37,38 @@ class CommandClass(zen.CommanderClass):
             ]
 
     def commander_execute(self, msg, flags):
-        right_handed = self.commander_arg_value(0)
+        element = self.commander_arg_value(0)
+        right_handed = self.commander_arg_value(1)
 
-        lx.eval("user.value right_handed %s" % int(right_handed))
+        lx.eval("user.value right_handed_%s %s" % (element, int(right_handed)))
 
-        frames = [
-            {
-                'frame_tag_left': 'zen6_listviews_left_tag',
-                'frame_tag_right': 'zen6_listviews_right_tag',
-                'restore_tag_left': 'zen6_listviews_left_restore',
-                'restore_tag_right': 'zen6_listviews_right_restore',
-                'tab_tags': ["zen6_toolProperties_vpTag", "zen6_itemsTab_vpTag", "zen6_meshOpsTab_vpTag", "zen6_presetBrowserTab_vpTag"]
-            }, {
-                'frame_tag_left': 'zen6_toolboxes_left_tag',
-                'frame_tag_right': 'zen6_toolboxes_right_tag',
-                'restore_tag_left': 'zen6_toolboxes_left_restore',
-                'restore_tag_right': 'zen6_toolboxes_right_restore',
-                'tab_tags': ["zen6_toolboxes_full_tag", "zen6_toolboxes_mini_tag", "zen6_toolboxes_miniFusion_tag", "zen6_toolboxes_miniPaint_tag", "zen6_toolboxes_miniSculpt_tag"]
-            }, {
-                'frame_tag_left': 'zen6_itemsTab_propsTabs_left_tag',
-                'frame_tag_right': 'zen6_itemsTab_propsTabs_right_tag',
-                'restore_tag_left': 'zen6_itemsTab_propsTabs_left_restore',
-                'restore_tag_right': 'zen6_itemsTab_propsTabs_right_restore',
-                'tab_tags': ["zen6_properties_vpGrp_tag", "zen6_channels_vpGrp_tag"]
-            }
-        ]
+        if element == "toolboxes":
+            frames = [
+                {
+                    'frame_tag_left': 'zen6_toolboxes_left_tag',
+                    'frame_tag_right': 'zen6_toolboxes_right_tag',
+                    'restore_tag_left': 'zen6_toolboxes_left_restore',
+                    'restore_tag_right': 'zen6_toolboxes_right_restore',
+                    'tab_tags': ["zen6_toolboxes_full_tag", "zen6_toolboxes_mini_tag", "zen6_toolboxes_miniFusion_tag", "zen6_toolboxes_miniPaint_tag", "zen6_toolboxes_miniSculpt_tag"]
+                }
+            ]
+
+        else:
+            frames = [
+                {
+                    'frame_tag_left': 'zen6_listviews_left_tag',
+                    'frame_tag_right': 'zen6_listviews_right_tag',
+                    'restore_tag_left': 'zen6_listviews_left_restore',
+                    'restore_tag_right': 'zen6_listviews_right_restore',
+                    'tab_tags': ["zen6_toolProperties_vpTag", "zen6_itemsTab_vpTag", "zen6_meshOpsTab_vpTag", "zen6_presetBrowserTab_vpTag"]
+                }, {
+                    'frame_tag_left': 'zen6_itemsTab_propsTabs_left_tag',
+                    'frame_tag_right': 'zen6_itemsTab_propsTabs_right_tag',
+                    'restore_tag_left': 'zen6_itemsTab_propsTabs_left_restore',
+                    'restore_tag_right': 'zen6_itemsTab_propsTabs_right_restore',
+                    'tab_tags': ["zen6_properties_vpGrp_tag", "zen6_channels_vpGrp_tag"]
+                }
+            ]
 
         for frame in frames:
             hide_frame_tag = frame['frame_tag_left'] if right_handed else frame['frame_tag_right']
@@ -84,13 +95,14 @@ class CommandClass(zen.CommanderClass):
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)
 
     def commander_query(self, index):
-        invert = self.commander_arg_value(1)
+        element = self.commander_arg_value(0)
+        invert = self.commander_arg_value(2)
 
-        if index == 0:
+        if index == 1:
             if invert:
-                return not lx.eval("user.value right_handed ?")
+                return not lx.eval("user.value right_handed_%s ?" % element)
             else:
-                return lx.eval("user.value right_handed ?")
+                return lx.eval("user.value right_handed_%s ?" % element)
 
     def commander_notifiers(self):
         return [("zen.notifier", "")]

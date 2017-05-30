@@ -34,7 +34,7 @@ class CommandClass(zen.CommanderClass):
             ]
 
     def commander_execute(self, msg, flags):
-        lx.eval("user.value zen_current_toolbox %s" % self.commander_arg_value(0))
+        lx.eval("user.value zen_current_toolbox {%s}" % self.commander_arg_value(0))
 
         notifier = zen.Notifier()
         notifier.Notify(lx.symbol.fCMDNOTIFY_CHANGE_ALL)

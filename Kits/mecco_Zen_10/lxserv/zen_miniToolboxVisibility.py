@@ -28,7 +28,7 @@ class CommandClass(zen.CommanderClass):
 
     def commander_execute(self, msg, flags):
         enable = self.commander_arg_value(0)
-        side = 'right' if lx.eval("user.value right_handed ?") else 'left'
+        side = 'right' if lx.eval("user.value right_handed_toolboxes ?") else 'left'
 
         if enable:
             safely_show_viewport('zen6_toolboxes_%s_tag' % side, side, 'zen6_toolboxes_%s_restore' % side)
@@ -40,7 +40,7 @@ class CommandClass(zen.CommanderClass):
 
     def commander_query(self, index):
         if index == 0:
-            side = 'right' if lx.eval("user.value right_handed ?") else 'left'
+            side = 'right' if lx.eval("user.value right_handed_toolboxes ?") else 'left'
             return viewport_is_visible('zen6_toolboxes_%s_tag' % side, side, 'zen6_toolboxes_%s_restore' % side)
 
     def commander_notifiers(self):
