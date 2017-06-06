@@ -1,13 +1,21 @@
+html {
+  background-color: #eee;
+}
+
 body {
   font-family:sans-serif;
-  width:720px;
+  width:800px;
   margin:2em auto;
   color:#666;
-  line-height: 1.7em;
+  background-color:#fff;
+  font-weight:200;
+  line-height:1.8em;
+  font-size:1.1em;
 }
 
 h1, h2, h3, h4 {
   color:#333;
+  text-transform: uppercase;
 }
 
 h2 {
@@ -22,19 +30,14 @@ hr {
   margin: 4em 0;
 }
 
-strong {
-  color:#333;
-}
-
-p {
-  margin-bottom: 2em;
-}
-
 a {
-  padding: .1em .3em 0;
-  background-color: rgb(241, 230, 255);
-  color: rgb(92, 16, 233);
-  display: inline-block;
+  text-decoration: none;
+  color:#e44db6;
+}
+
+img {
+  margin: 0 0 2em 0;
+  width: 100%;
 }
 
 ul#commandsList {
@@ -58,15 +61,24 @@ div.definition {
   margin-bottom:2em;
 }
 
-code {
-  color:#c22980;
-  font-size:1.2em;
+.textContent {
+  padding: 2em 6em 4em;
 }
 
 pre {
   background-color: #eee;
   padding: 1em;
   margin: 2em 0;
+  overflow:hidden;
+}
+
+code {
+  padding: 0 .4em 0;
+  background-color: rgb(234, 248, 255);
+  color: rgb(4, 114, 167);
+  display: inline-block;
+  border-radius: .2em;
+  font-size: 1.1em;
 }
 
 .keystroke {
@@ -76,13 +88,19 @@ pre {
   display: inline-block;
 }
 
+.click {
+  padding: 0 .4em 0;
+  background-color: rgb(245, 230, 255);
+  color: rgb(96, 0, 183);
+  display: inline-block;
+  border-radius: .2em;
+}
+
 .tooltip {
   font-style:italic;
 }
 
 #quicklinks {
-  background-color:#f5f5f5;
-  padding:1em 2em;
   margin:4em 0;
 }
 
@@ -92,8 +110,34 @@ pre {
 }
 
 #quicklinks ul li {
-  padding:1em 0;
-  border-top:1px solid #ddd;
+  padding:.5em 0;
+  border-bottom:1px solid #ddd;
+  position: relative;
+}
+
+#quicklinks ul li:last-child {
+  border-bottom:0;
+}
+
+#quicklinks ul li code {
+  position: absolute;
+  left: 15em;
+}
+
+#quickstart ol {
+  padding-left: 0;
+}
+
+#quickstart li {
+  margin-bottom: 1em;
+}
+
+.tip {
+    background-color: #e4f4ff;
+    color: #1d7bcc;
+    padding: 1em;
+    margin: 1em 0;
+    font-size: .9em;
 }
 
 ul.arguments li {
@@ -119,7 +163,7 @@ ul.arguments li li {
 }
 
 div.alert {
-  background-color:#eee;
-  color:red;
-  padding:2em;
+    background-color: #ffe5e5;
+    color: #af0808;
+    padding: 2em;
 }
