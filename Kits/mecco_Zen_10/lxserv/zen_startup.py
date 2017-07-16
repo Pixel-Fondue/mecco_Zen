@@ -8,6 +8,10 @@ CMD_NAME = 'zen.startup'
 class myGreatCommand(CommanderClass):
 
     def commander_execute(self, msg, flags):
+        if not lx.eval('query scriptsysservice userValue.isDefined ? zen_version'):
+            lx.eval('user.defNew zen_version string')
+            lx.eval('user.value zen_version {}')
+
         zen_version_from_config = lx.eval("user.value zen_version ?")
 
         kit_folder = lx.eval("query platformservice alias ? {kit_mecco_zen:}")
