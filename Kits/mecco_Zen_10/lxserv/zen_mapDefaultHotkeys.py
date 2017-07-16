@@ -229,7 +229,7 @@ class CommandClass(CommanderClass):
                     lx.out("Failed to set '%s' to '%s'." % (command, key))
 
         dialog_serv.MonitorRelease()
-        modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Help > Zen Hotkey Reference" % n)
+        # modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Help > Zen Hotkey Reference" % n)
 
 lx.bless(CommandClass, "zen.mapDefaultHotkeys")
 
