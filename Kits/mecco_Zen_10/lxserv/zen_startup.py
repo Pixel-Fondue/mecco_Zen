@@ -1,6 +1,6 @@
 # python
 
-import lx, modo, lxu.command, traceback, os, re
+import lx, modo, os, re
 from zen import CommanderClass
 
 CMD_NAME = 'zen.startup'
@@ -8,6 +8,10 @@ CMD_NAME = 'zen.startup'
 class myGreatCommand(CommanderClass):
 
     def commander_execute(self, msg, flags):
+        if not lx.eval('query scriptsysservice userValue.isDefined ? zen_version'):
+            lx.eval('user.defNew zen_version string')
+            lx.eval('user.value zen_version {}')
+
         zen_version_from_config = lx.eval("user.value zen_version ?")
 
         kit_folder = lx.eval("query platformservice alias ? {kit_mecco_zen:}")
@@ -17,7 +21,7 @@ class myGreatCommand(CommanderClass):
         # index_xml = xml.etree.ElementTree.parse(index_file).getroot()
         # zen_version_installed = index_xml.attrib["version"]
 
-        # Regex is hardly ideal for this. But it works in the absense of an XML parser.
+        # Regex is hardly ideal for this. But it works in the absence of an XML parser.
         with open(index_file, 'r') as index_file_data:
             xml_as_string = index_file_data.read().replace('\n', '')
 
@@ -26,12 +30,7 @@ class myGreatCommand(CommanderClass):
         zen_version_installed = m.group(1)
 
         if not zen_version_from_config:
-            modo.dialogs.alert(
-                "New Zen Install",
-                "New install of Zen detected. Set hotkeys and other prefs: Preferences > Mechanical Color > Zen UI\nSee 'Help > Zen Release Notes' for more."
-                )
-            lx.eval('layout.window Preferences')
-            lx.eval('pref.select mecco/zen_ui_prefs set')
+            lx.eval('zen.mapDefaultHotkeys')
 
         elif zen_version_from_config != zen_version_installed:
             modo.dialogs.alert(

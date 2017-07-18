@@ -1,5 +1,6 @@
 # python
 
+import time
 import lx, lxu, modo
 from zen import CommanderClass
 
@@ -203,8 +204,14 @@ class CommandClass(CommanderClass):
         return args
 
     def commander_execute(self, msg, flags):
-        counter = 0
+        m = len([i for i in self.commander_args().iteritems() if i])
+
+        dialog_serv = lx.service.StdDialog()
+        monitor = dialog_serv.MonitorAllocate('Mapping Hotkeys...')
+        monitor.Initialize(m)
+
         for n, hotkey in enumerate(HOTKEYS):
+            monitor.Increment(1)
             if not self.commander_arg_value(n):
                 continue
             command = hotkey["command"]
@@ -219,11 +226,10 @@ class CommandClass(CommanderClass):
                 try:
                     lx.eval('!cmds.mapKey {%s} {%s} {%s} {%s} {%s} {%s}' % (key, command, mapping, state, region, context))
                 except:
-                    lx.out("Could not set '%s' to '%s'." % (command, key))
+                    lx.out("Failed to set '%s' to '%s'." % (command, key))
 
-            counter += 1
-
-        modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Help > Zen Hotkey Reference" % counter)
+        dialog_serv.MonitorRelease()
+        # modo.dialogs.alert("Mapped Zen Hotkeys", "Mapped %s Zen hotkeys. See Help > Zen Hotkey Reference" % n)
 
 lx.bless(CommandClass, "zen.mapDefaultHotkeys")
 
