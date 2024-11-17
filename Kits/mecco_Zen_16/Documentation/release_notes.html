@@ -1,0 +1,226 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Zen Release Notes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/boilerplate.css">
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+      <div class="textContent">
+      <h1>Zen Release Notes</h1>
+      <h2>1.3.4</h2>
+
+      Minor UI tweaks. No prefs reset required.
+
+      <h2>1.3.2</h2>
+
+      <div class="alert"><b>System > Reset Preferences</b> is required for this update.</div>
+
+      <div class="videoWrapper">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/JCbAZWQ4S6k" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <ul>
+        <li>
+          <strong>Mesh Fusion improvements: </strong>
+          Added Mesh Fusion cut/copy/paste/split commands, and made Fusion tools available from within the Zen context tools.
+        </li>
+        <li>
+          <strong>Right-handed prefs separated: </strong>
+          The right-handed setting is now separate for toolboxes and lists, allowing you to put lists on one side and toolboxes on the other.
+        </li>
+        <li>
+          <strong>Viewport improvements: </strong>
+          UV viewport no longer shows UVs from inactive meshes by default. "glmeter" is now available in viewport properties panel.
+        </li>
+        <li>
+          <strong>Layout improvements: </strong>
+          Channels list now defaults to show all channels. Images &amp; Clips viewer now defaults to List mode. Added "maximize" behavior to Big Preview viewport for GL camera viewport. Removed "recent" tools from header by default (use Zen UI prefs to enable). Added Python interpreter to scripting layout.
+        </li>
+        <li>
+          <strong>Preferences improvements: </strong>
+          Cleaned up preferences form. Middle-mouse properties popover now works in the Groups panel.
+        </li>
+      </ul>
+
+      <h2>1.3.1</h2>
+      <ul>
+        <li>
+          <strong>Render toolbox: </strong>
+          Mini toolbox at left for use with the new big progressive viewport for
+          working with progressive rendering: render settings, camera settings, save image,
+          save layered, pass group/pass, and bucket render.
+        </li>
+        <li>
+          <strong>hide/show mini toolbox from toolboxes menu: </strong>
+          The toolboxes menu now has a check box for hiding and showing the mini toolbox on the left
+        </li>
+        <li>
+          <strong>Third party toolbox support: </strong>
+          The toolbox system can now be extended by third parties to add new toolboxes to
+          both the 'V' key and mini toolbars. See <a href="developer.html">developer</a>
+          documentation for instructions.
+        </li>
+        <li>
+          <strong>viewport switcher button highlighting: </strong>
+          The viewport buttons at bottom center now highlight to indicate which one is currently active
+        </li>
+        <li>
+          <strong>New viewports: </strong>
+          There are now four viewport options: model, topo, animate, and render.
+          Swtiching between viewports using the buttons at the bottom center will
+          also change the current toolbar: context tools for the model viewport,
+          retopology tools for the topo viewport, animation tools for the animation
+          viewport, and render commands for the progressive render viewport.
+        </li>
+        <li>
+          <strong>Quad View Everywhere: </strong>
+          Quad view is now supported with the model, topo, and animate viewports.
+        </li>
+        <li>
+          <strong>Moved Help menu to the proper place: </strong>
+          Zen Help is now under Help > Kit Help
+        </li>
+        <li>
+          <strong>Merge vertices from any selection mode: </strong>
+          Merge vertices is now available in the "mesh edit" menu from all selection modes.
+        </li>
+        <li>
+          <strong>`Enter` to rename in Groups: </strong>
+          Enter key now renames in Groups panel like everywhere else
+        </li>
+        <li>
+          <strong>Added MODO 11 selection sets UI: </strong>
+          Added the new selection sets menu from the MODO 11 modes bar
+        </li>
+        <li>
+          <strong>Channels List: </strong>
+          Channels list in palettes menu now has "show all" enabled by default
+        </li>
+        <li>
+          <strong>Better viewport properties: </strong>
+          The viewport properties popover has been completely reworked, and is now mapped
+          to the 'o' key in the Zen default hotkeys. It includes everything the default
+          'o' key viewport properties has and more, in a much cleaner package.
+        </li>
+        <li>
+          <strong>Viewport presets: </strong>
+          Viewport presets are now available from the new viewport properties popover
+        </li>
+        <li>
+          <strong>Event log: </strong>
+          Palettes list now includes the Event Log for developers
+        </li>
+        <li>
+          <strong>Better default viewport settings: </strong>
+          The modeling, retopology, animation, and camera viewports now have much more
+          sensible default visibility settings.
+        </li>
+        <li>
+          <strong>Fixed various bugs: </strong>
+          Lots of minor bug fixes
+        </li>
+      </ul>
+
+      <h2>10.8.0</h2>
+
+      <ul>
+        <li>
+          <strong>Lots more toolboxes: </strong>
+          The 'V' key toolbox and the 'mini' toolbox on the left side are now always
+          in sync, showing the toolbox specified in the "Toolbox" popup. The popup
+          is available at the bottom left of Zen in the footer bar, or at the top
+          of the 'V' key toolbox just below the tool modes icons. We've added tons
+          of previously-missing toolbars (hair, particle paint, vertex maps, command regions,
+          inverse kinematics, and tons of others).
+        </li>
+        <li>
+          <strong>Smarter, more consistent toolboxes: </strong>
+          In addition to adding new toolboxes, the existing ones have been cleaned up
+          and streamlined, removing redundancy and putting things in more predictable
+          places. This is an ongoing effort. Let us know if anything could be better.
+        </li>
+        <li>
+          <strong>Layout improvements: </strong>
+          The Zen layout has been updated and improved, adding an item properties and
+          channels list to the sidebar, separating the dopesheet from the other frames
+          on the lower half (for independent sizing and simultaneous use), and several
+          other changes necessary for the new retopology improvements (see below).
+        </li>
+        <li>
+          <strong>Retopology improvements: </strong>
+          There is now a dedicated retopology toolbox in the 'V' key and 'mini' toolbars,
+          and a separate viewport for retopology vs normal modeling. We tried very
+          hard to make it possible to both model and retopo in a single viewport, but
+          it simply wasn't feasible with the MODO viewport system. The new solution is much
+          more consistent, and not too much hassle.
+        </li>
+        <li>
+          <strong>Quad modeling viewport: </strong>
+          The default modeling viewport is now a maximized quad-modeling viewport. To
+          work in quad mode, click the yellow 'maximize' button at the top right of the
+          modeling viewport. You can, of course, maximize it again the same way.
+          This one was acctually added in 10.7.0, but we forgot to announce it.
+        </li>
+        <li>
+          <strong>Bug fixes: </strong>
+          Cameras and lights are now visible by default in the model viewport.
+          The graph editor works better and more consistently.
+        </li>
+      </ul>
+
+      <h2>10.7.0</h2>
+
+      <ul>
+        <li>
+          <strong>Hotkey Mapping Options: </strong>
+          Preferences > Mechanical Color > Zen UI > Map Default Zen Hotkeys...
+          Now provides a list of checkboxes for each hotkey. You can choose which
+          to map and which to ignore.
+        </li>
+        <li>
+          <strong>Hotkey Defaults: </strong>
+          'V' and 'G' keys are no longer mapped by default. You will need to add
+          these manually using the Zen UI preferences, either using the newly-improved
+          "Map Default Zen Hotkeys..." utility or by manually setting hotkeys using
+          the individual form mapping buttons below.
+        </li>
+        <li>
+          <strong>Revert Hotkeys: </strong>
+          Hotkey preferences can now be reverted back to their factory defaults
+          (rather than simply clearing them, as before). Recommended hotkey
+          suggestions are included in button labels.
+        </li>
+        <li>
+          <strong>Right-handed layout option: </strong>
+          Lists and toolboxes can now be displayed on the right using the
+          "Right-Handed List Buttons" toggle in the Zen UI preferences.
+        </li>
+        <li>
+          <strong>Toolbox Updates: </strong>
+          Toolbox now includes "Poly Reduction" and "Add Point" tools where appropriate.
+        </li>
+        <li>
+          <strong>New/Updated install alerts: </strong>
+          When new versions of Zen are installed or updated, an alert will fire
+          to remind you to reset your MODO preferences. Afterwards, the release
+          notes will be opened in a new browser window.
+        </li>
+        <li>
+          <strong>Bug fix: Topo Mode viewport shading: </strong>
+          Viewport shading modes now remember their state when toggling topo mode.
+          This fixes various viewport shading related issues related to zen topo mode.
+        </li>
+        <li>
+          <strong>Bug fix: Performance: </strong>
+          A significant lag when RMB clicking in extremely large scene files is fixed.
+          You may now right-click with impunity.
+        </li>
+      </ul>
+    </ul>
+    </body>
+</html>
